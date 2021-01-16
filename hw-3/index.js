@@ -16,9 +16,6 @@ const trackEvent = async (value) => {
                 v: 1,
                 tid: RESOURCE_ID,
                 cid: 'test_anton',
-                // t: 'pageview',
-                // dp: '/example',
-                // dt: 'Example Title',
                 t: 'event',
                 ec: '_GENERAL',
                 ea: 'get transaction',
@@ -44,7 +41,6 @@ const main = async () => {
             const transactionId = await findLatestIrreversibleTransaction('simpleassets');
             await trackEvent(transactionId);
             counter++;
-            console.log(counter, transactionId);
             if (counter > 200) {
                 clearInterval(intervalId);
             }
