@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  web:
+    build: ./web-server
+    ports:
+      - "50000:8080"
+    links:
+      - "db:mysqldb"
+      - "redis:cache"
+  db:
+    build: ./db
+    volumes:
+      - ./db/config:/etc/mysql/conf.d
+    ports:
+      - "3306:3306"
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
