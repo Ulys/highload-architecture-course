@@ -33,7 +33,9 @@ setTimeout(() => {
         /* UNCOMMENT END for test with REDIS */
         connection.query('SELECT * FROM random_data', function (err, result) {
             if (!err) {
+                /* UNCOMMENT START for test with REDIS */
                 // redisClient.set('test_key', result);
+                /* UNCOMMENT END for test with REDIS */
                 return res.json({
                     status: 'success',
                     data: result,
