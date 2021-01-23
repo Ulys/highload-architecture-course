@@ -2,12 +2,12 @@ const express = require('express');
 const app = express();
 const mysql = require('mysql');
 //redis setup
-let client = require('redis').createClient('cache');
-let Redis = require('ioredis');
-let redis = new Redis(redis_url);
 
 
 setTimeout(() => {
+    /* UNCOMMENT START for test with REDIS */
+    // const redisClient = require('./redis-client');
+    /* UNCOMMENT END for test with REDIS */
     const connection = mysql.createConnection({
         host: 'mysqldb',
         port: 3306,
@@ -21,9 +21,19 @@ setTimeout(() => {
     const PORT = 8080;
     const HOST = '0.0.0.0';
 
-    app.get('/data', (req, res) => {
+    app.get('/data', async (req, res) => {
+        /* UNCOMMENT START for test with REDIS */
+        // const redisResult = await redisClient.get('test_key');
+        // if (redisResult) {
+        //     return res.json({
+        //         status: 'success',
+        //         data: redisResult,
+        //     });
+        // }
+        /* UNCOMMENT END for test with REDIS */
         connection.query('SELECT * FROM random_data', function (err, result) {
             if (!err) {
+                // redisClient.set('test_key', result);
                 return res.json({
                     status: 'success',
                     data: result,
